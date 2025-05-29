@@ -8,6 +8,14 @@ on:
 
 jobs:
   build-and-test:
+      env:
+      # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
+      # in GitHub repo → Settings → Secrets → Actions
+      E2E: true
+      CI: true
+      COURSE: full-stack-development-comp3036-2025
+      SKIP_ENV_VALIDATION: true
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -27,7 +35,7 @@ jobs:
         run: pnpm test
       - name: Build Project 🏗️
         run: pnpm build
-        
+
       - name: Test Application
         id: npm1
         uses: WesternSydneyUniversity/autograding-command-grader@v3
